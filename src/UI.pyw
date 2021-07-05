@@ -136,6 +136,7 @@ def reset():
     selected_y = -1
     targets = []
     clear_tips()
+    clear_selector()
     draw_board()
 
 def select(x, y):
