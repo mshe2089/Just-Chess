@@ -147,7 +147,7 @@ class game:
             for i in range(8):
                 for j in range(8):
                     if self.positions[i][j] == king:
-                        if self.positions[i][j-1] == "-" and self.positions[i][j-2] == "-" and self.positions[i][j-3] == "-" and not self.under_attack(self.positions, team, j, i) and not self.under_attack(self.positions, team, j-1, i) and not self.under_attack(self.positions, team, j-2, i) and not self.under_attack(self.positions, team, j-3, i):
+                        if self.positions[i][j-1] == "-" and self.positions[i][j-2] == "-" and not self.under_attack(self.positions, team, j, i) and not self.under_attack(self.positions, team, j-1, i) and not self.under_attack(self.positions, team, j-2, i):
                             return [j-2,i]
                         return None
         
