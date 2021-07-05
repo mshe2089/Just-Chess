@@ -1,7 +1,7 @@
 # Just-Chess
 It's just 2 player chess. A quick personal project.<br/>
 Written in python, GUI created in tkinker.
-
+<br/>
 ### Features:
 -Just chess<br/>
 -Horrible chess engine written from scratch<br/>
