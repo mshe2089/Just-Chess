@@ -5,9 +5,9 @@ block_cipher = None
 
 
 a = Analysis(['ui.pyw'],
-             pathex=['C:\\Users\\danie\\Desktop\\git\\Chess\\src'],
+             pathex=['C:\\Users\\danie\\Desktop\\git\\chess-python\\src'],
              binaries=[],
-             datas=[('C:\\Users\\danie\\Desktop\\git\\Chess\\src\\Textures\\*.png', 'Textures')],
+             datas=[('C:\\Users\\danie\\Desktop\\git\\chess-python\\src\\Textures\\*.png', 'Textures')],
              hiddenimports=[],
              hookspath=[],
              runtime_hooks=[],
