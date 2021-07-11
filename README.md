@@ -10,6 +10,6 @@ Written in python, GUI created in tkinker.<br/>
 -Buttons and labels that don't do anything because of laziness.<br/>
 -More features might (probably won't) come soon, including an AI opponent.<br/>
 ### Running:
-Run the UI.pyw script in the src directory.<br/>
+Run the UI.pyw script in the src directory. You need an up-to-date python installation.<br/>
 (temporary workaround, since a pyinstaller bug causes compiled executables to be labelled as malware)<br/>
 Have fun (you probably won't).<br/>
