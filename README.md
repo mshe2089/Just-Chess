@@ -10,5 +10,6 @@ Written in python, GUI created in tkinker.<br/>
 -Buttons and labels that don't do anything because of laziness.<br/>
 -More features might (probably won't) come soon, including an AI opponent.<br/>
 ### Running:
-Run the UI.pyw script in the src directory. (due to a bug, pyinstaller compiled executables tend to be labelled as malware)<br/>
+Run the UI.pyw script in the src directory.<br/>
+(temporary workaround, since a pyinstaller bug causes compiled executables to be labelled as malware)<br/>
 Have fun (you probably won't).<br/>
