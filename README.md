@@ -12,4 +12,7 @@ Was going to implement opponent with Pytorch but just coding chess logic was alr
 ### Running:
 Run the UI.pyw script in the src directory. You need an up-to-date python installation.<br/>
 (temporary workaround, since a pyinstaller bug causes compiled executables to be labelled as malware)<br/>
+
+You can build it into a standalone executable with pybuilder using the .spec file.<br/>
+
 Have fun (you probably won't).<br/>
