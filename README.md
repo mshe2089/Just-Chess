@@ -1,5 +1,5 @@
 # Just-Chess
-It's just 2 player chess. A quick personal project.<br/>
+It's just 2 player chess. <br/>
 Written in python, GUI created in tkinker.<br/>
 Was going to implement opponent with Pytorch but just coding chess logic was already a mouthful.<br/>
 ### Features:
