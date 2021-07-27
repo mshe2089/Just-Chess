@@ -1,6 +1,7 @@
 # Just-Chess
 It's just 2 player chess. A quick personal project.<br/>
-Written in python, GUI created in tkinker, compiled with pyinstaller.<br/>
+Written in python, GUI created in tkinker.<br/>
+Was going to implement opponent with Pytorch but just coding chess logic was already a mouthful.<br/>
 ### Features:
 -Just chess<br/>
 -Horrible chess engine written from scratch<br/>
@@ -8,6 +9,7 @@ Written in python, GUI created in tkinker, compiled with pyinstaller.<br/>
 -Move validation (you can't take the king even if you try)<br/>
 -Export game to text file, in Forsyth–Edwards_Notation.<br/>
 -Buttons and labels that don't do anything because of laziness.<br/>
--More features might (probably won't) come soon, including an AI opponent.<br/>
 ### Running:
-Run Chess.exe from the base directory. Have fun (you probably won't).<br/>
+Run the UI.pyw script in the src directory. You need an up-to-date python installation.<br/>
+(temporary workaround, since a pyinstaller bug causes compiled executables to be labelled as malware)<br/>
+Have fun (you probably won't).<br/>
