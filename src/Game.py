@@ -7,6 +7,7 @@ from Pieces.Pawn import pawn_moves
 from Pieces.Knight import knight_moves
 from Pieces.King import king_moves
 from Pieces.Queen import queen_moves
+from RandomBot import randomBot
 
 #Game supervisor, Move validator
 key = { "p":pawn_moves,
@@ -38,10 +39,17 @@ class game:
     #pawn promotion
     #50 move
 
+    def test(self):
+        print("TEST")
+
     def __init__(self, turn) -> None:
         self.reset()
 
     def reset(self):
+        self.whiteBot = None
+        self.blackBot = None
+        self.whiteBotMove = []
+        self.blackBotMove = []
         self.to_promote = None#location of piece to promote
         self.check = False#unused
         self.log = []#unused
@@ -55,6 +63,18 @@ class game:
         self.positions = [["r","n","b","q","k","b","n","r"],["p","p","p","p","p","p","p","p"],["-","-","-","-","-","-","-","-"],["-","-","-","-","-","-","-","-"],["-","-","-","-","-","-","-","-"],["-","-","-","-","-","-","-","-"],["P","P","P","P","P","P","P","P"],["R","N","B","Q","K","B","N","R"]]
         #self.oldpositions - a stack we could use to push old positions to
         #self.positions = [["r","n","b","q","k","b","-","-"],["p","p","p","p","p","p","P","-"],["-","-","-","-","-","-","-","P"],["-","-","-","-","-","-","-","-"],["-","-","-","-","-","-","-","-"],["-","-","-","-","-","-","-","-"],["p","p","p","P","P","P","P","P"],["R","-","-","-","K","-","-","R"]]
+    
+    def newbotBlack(self,bot):
+        if bot == "Human":
+            self.blackBot = None
+        elif bot == "Random":
+            self.blackBot = randomBot(1, self)
+
+    def newbotWhite(self,bot):
+        if bot == "Human":
+            self.whiteBot = None
+        elif bot == "Random":
+            self.whiteBot = randomBot(0, self)
 
     def undo(self):
         pass
@@ -210,8 +230,13 @@ class game:
                 if self.positions[i][j] != "-":
                     if (self.positions[i][j].islower() and team == 0) or (self.positions[i][j].isupper() and team == 1):
                         if self.get_moves(j, i) != []:
-                            return False
-        return True
+                            return 0
+        for i in range(8):
+            for j in range(8):
+                if self.positions[i][j] != "-":
+                    if ((self.positions[i][j] == "k" and team == 0) or (self.positions[i][j] == "K" and team == 1)) and not self.under_attack(self.positions, 1-team, j, i):
+                        return 2
+        return 1
 
     def get_moves(self, x, y): #get all valid moves of piece at x, y
         team = 1
@@ -242,7 +267,27 @@ class game:
             i+=1
 
         return moveset
-        
+
+    def ponder(self, team):
+        if (team == 1 and self.blackBot == None) or (team == 0 and self.whiteBot == None):
+            raise Exception('No bot to ponder!')
+        if team == 1:
+            self.blackBotMove = self.blackBot.decide()
+            print("Black bot says:")
+            print(self.blackBotMove)
+        elif team == 0:
+            self.whiteBotMove = self.whiteBot.decide()
+            print("White bot says:")
+            print(self.whiteBotMove)
+
+    def ponderPromotion(self, team):
+        if (team == 1 and self.blackBot == None) or (team == 0 and self.whiteBot == None):
+            raise Exception('No bot to ponder!')
+        if team == 1:
+            self.blackBotMove = self.blackBot.decidePromotion()
+        elif team == 0:
+            self.whiteBotMove = self.whiteBot.decidePromotion()
+            
 
     def move(self, startx, starty, endx, endy): #moves piece in position matrix and inverts turn
         self.oldpositions = copy.deepcopy(self.positions)
@@ -291,11 +336,11 @@ class game:
                 if self.turn == 1:
                     self.FMC += 1
                 
-                ###increment full move counter
+                ###increment half move counter
                 if piece.upper() == "P" or capture:
                     self.HMC == 0
                 else:
-                    self.HMC += 0
+                    self.HMC += 1
 
                 self.disallow_castle(piece, startx)
                 self.turn = 1 - self.turn
@@ -310,8 +355,10 @@ class game:
         self.positions[y][x] = "-"
         return piece
 
-    def piece_selectable(self, x, y):#check whether a turn valid piece was selected
+    def piece_selectable(self, x, y, isbot):#check whether a turn valid piece was selected
         if self.to_promote != None:
+            return False
+        if (self.turn == 0 and self.whiteBot != None or self.turn == 1 and self.blackBot != None) and not isbot:
             return False
         if self.positions[y][x] != "-" and ((self.turn == 0 and self.positions[y][x].isupper()) or (self.turn == 1 and self.positions[y][x].islower())):#if piece selected and turn is correct
             return True
